@@ -13,6 +13,14 @@ class PinsController < ApplicationController
 		end
 
 	end
+	
+	def page
+		if params[:tag]
+			@pins = Pin.tagged_with(params[:tag])
+		else
+			@pins = Pin.all
+		end
+	end
 
 	def show
 		@cs = C.where(pin_id: @pin)

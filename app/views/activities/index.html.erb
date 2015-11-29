@@ -1,10 +1,8 @@
 <h1> Friend's Activities </h1>
 <%= @activities.count %>
 <% @activities.each do |activity| %>
-	<%= 2 %>
-	<div class = "activity">
-	
-	<%= link_to activity.owner.name, activity.owner if activity.owner %>
-	added comment to <%= link_to activity.trackable.pin.title, activity.trackable.pin%> 
-	</div>
+	<div class="activity">
+    <%= link_to activity.owner.email, activity.owner if activity.owner %>
+    
+    <%= render_activity activity %>
 <% end %>

@@ -22,8 +22,10 @@ Rails.application.routes.draw do
   	root to: "homes#show"
     resources :download
   	resources :cs
+    
    collection do
       get 'show1'
+      get 'page'
     end
   	member do
   		put "like",to: "pins#upvote"
