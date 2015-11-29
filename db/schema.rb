@@ -30,17 +30,6 @@ ActiveRecord::Schema.define(version: 20151128212342) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
 
-  create_table "comments", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
-
   create_table "cs", force: :cascade do |t|
     t.text     "content"
     t.integer  "pin_id"
@@ -51,19 +40,6 @@ ActiveRecord::Schema.define(version: 20151128212342) do
 
   add_index "cs", ["pin_id"], name: "index_cs_on_pin_id"
   add_index "cs", ["user_id"], name: "index_cs_on_user_id"
-
-  create_table "follows", force: :cascade do |t|
-    t.integer  "followable_id",                   null: false
-    t.string   "followable_type",                 null: false
-    t.integer  "follower_id",                     null: false
-    t.string   "follower_type",                   null: false
-    t.boolean  "blocked",         default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "follows", ["followable_id", "followable_type"], name: "fk_followables"
-  add_index "follows", ["follower_id", "follower_type"], name: "fk_follows"
 
   create_table "friends", force: :cascade do |t|
     t.integer  "friend_id"
@@ -89,12 +65,6 @@ ActiveRecord::Schema.define(version: 20151128212342) do
   end
 
   add_index "pins", ["user_id"], name: "index_pins_on_user_id"
-
-  create_table "searches", force: :cascade do |t|
-    t.string   "keywords"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -134,14 +104,6 @@ ActiveRecord::Schema.define(version: 20151128212342) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "videos", force: :cascade do |t|
-    t.string   "name"
-    t.string   "string"
-    t.string   "attachment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "votes", force: :cascade do |t|
     t.integer  "votable_id"
